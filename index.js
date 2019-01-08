@@ -106,6 +106,11 @@ module.exports = function(input, inputMap) {
 			});
 			return;
 		}
+		map.sources = map.sources.map(function (source) {
+			return (!source || path.isAbsolute(source))
+				? source
+				: path.resolve(context, source);
+		});
 		callback(null, input.replace(match[0], ''), map);
 	}
 }
